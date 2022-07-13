@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     image: shadow1212/spring_mvc:1.1
     tty: true
-    volumes:
-      - ./:/
+#    volumes:
+#      - ./:/
     ports:
       - "8080:8080"
