@@ -1,0 +1,12 @@
+version: '3'
+services:
+  spring:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: shadow1212/spring_mvc:1.1
+    tty: true
+    volumes:
+      - ./:/
+    ports:
+      - "8080:8080"
