@@ -1,18 +1,34 @@
 package org.teamxd.spring_mvc;
 
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.teamxd.spring_mvc.service.ScraperService;
 
-@SpringBootApplication(exclude = {ErrorMvcAutoConfiguration.class})
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
+@SpringBootApplication()
 @RestController
 public class SpringMvcApplication {
 
-	@RequestMapping("/")
-	public String home() {
-		return "Hello Docker World";
+	@CrossOrigin
+	@RequestMapping(value = "/images/{value}", method = RequestMethod.GET)
+	public List<String> getImages(
+			@PathVariable("value") String value) throws UnsupportedEncodingException {
+		if (!Objects.equals(value, " ")) {
+			ScraperService scraperService = new ScraperService(new ChromeDriver());
+			List<WebElement> words = scraperService.getRelatedWords(value);
+			List<String> result = Arrays.asList(words.stream().map(webElement -> webElement.getAttribute("src")).toArray(String[]::new));
+			words.forEach(word->System.out.println(word.getAttribute("src")));
+			return result;
+		}
+		return Arrays.asList("word is null");
+
 	}
 
 	public static void main(String[] args) {
