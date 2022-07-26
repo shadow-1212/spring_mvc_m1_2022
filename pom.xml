@@ -57,7 +57,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<finalName>maven_spring_mvc</finalName>
 		<plugins>

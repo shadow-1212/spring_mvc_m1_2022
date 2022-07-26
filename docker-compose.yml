@@ -3,10 +3,11 @@ services:
   spring:
     build:
       context: .
-      dockerfile: Dockerfile
-    image: shadow1212/spring_mvc:1.1
+      dockerfile: Dockerfile-mvn
+    image: shadow1212/spring_mvc:1.2
+    container_name: spring_mvc
     tty: true
-#    volumes:
-#      - ./:/
+    volumes:
+      - ./:/app/
     ports:
       - "8080:8080"
