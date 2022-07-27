@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-mvn
-    image: shadow1212/spring_mvc:1.2
+    image: shadow1212/spring_mvc:1.3
     container_name: spring_mvc
     tty: true
     volumes:
