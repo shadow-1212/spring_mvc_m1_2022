@@ -24,10 +24,12 @@ public class SpringMvcApplication {
 			ScraperService scraperService = new ScraperService(new ChromeDriver());
 			List<WebElement> words = scraperService.getRelatedWords(value);
 			List<String> result = Arrays.asList(words.stream().map(webElement -> webElement.getAttribute("src")).toArray(String[]::new));
-			words.forEach(word->System.out.println(word.getAttribute("src")));
-			return result;
+			if(result.size() > 0) {
+				return result;
+			}
+			return List.of();
 		}
-		return Arrays.asList("word is null");
+		return List.of("word is null");
 
 	}
 
